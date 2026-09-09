@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Photo Manager</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ============================= HEADER / NAV ============================= -->
+  <header class="app-header">
+    <div class="header-inner">
+      <a href="index.html" class="brand">
+        <span class="brand-mark">◆</span>
+        <span class="brand-name">Photo Manager</span>
+      </a>
+      <nav class="main-nav" id="mainNav">
+        <a href="index.html" class="nav-link active">Home</a>
+        <a href="gallery.html" class="nav-link">Gallery</a>
+        <a href="admin.html" class="nav-link">Admin</a>
+      </nav>
+      <button type="button" class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false">☰</button>
+    </div>
+  </header>
+
+  <main class="app-main">
+
+    <!-- ========================= UPLOAD PANEL ========================= -->
+    <section class="panel upload-panel" aria-label="Submit a photo">
+      <h2 class="panel-title">Submit a photo</h2>
+      <p class="panel-subtitle">Your photo will appear in the gallery once an admin approves it.</p>
+
+      <div class="field">
+        <label for="photoName">Photo name</label>
+        <input type="text" id="photoName" placeholder="e.g. Sunset at the beach" autocomplete="off" />
+      </div>
+
+      <div id="dropZone" class="drop-zone" tabindex="0" role="button" aria-label="Drag and drop an image, or choose a photo">
+        <input type="file" id="fileInput" accept="image/jpeg,image/jpg,image/png,image/webp,image/gif" hidden />
+
+        <div id="dropZoneEmpty" class="drop-zone-empty">
+          <div class="drop-icon">⤒</div>
+          <p class="drop-text-desktop">Drag &amp; drop an image here, or</p>
+          <button type="button" id="chooseBtn" class="btn btn-secondary">Choose Photo</button>
+          <p class="drop-hint">JPG, PNG, WEBP or GIF · up to 10MB</p>
+        </div>
+
+        <div id="previewWrap" class="preview-wrap hidden">
+          <img id="previewImg" alt="Selected preview" />
+          <div class="preview-meta">
+            <span id="previewName" class="preview-filename"></span>
+            <span id="previewSize" class="preview-filesize"></span>
+          </div>
+          <button type="button" id="changeBtn" class="btn btn-text">Change photo</button>
+        </div>
+      </div>
+
+      <div id="progressWrap" class="progress-wrap hidden">
+        <div class="progress-track"><div id="progressBar" class="progress-bar"></div></div>
+        <span id="progressLabel" class="progress-label">0%</span>
+      </div>
+
+      <div id="statusMsg" class="status-msg hidden" role="status"></div>
+
+      <div class="upload-actions">
+        <button type="button" id="resetBtn" class="btn btn-ghost">Clear</button>
+        <button type="button" id="uploadBtn" class="btn btn-primary">
+          <span id="uploadBtnText">Submit</span>
+          <span id="uploadSpinner" class="spinner hidden"></span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ========================= GALLERY SECTION ========================= -->
+    <section class="panel gallery-panel" aria-label="Approved photo gallery">
+      <div class="gallery-header">
+        <h2 class="panel-title">Gallery</h2>
+        <span id="resultCount" class="gallery-meta">0 photos</span>
+      </div>
+
+      <div id="galleryLoading" class="gallery-loading">
+        <div class="spinner spinner-lg"></div>
+        <p>Loading photos…</p>
+      </div>
+
+      <div id="galleryEmpty" class="gallery-empty hidden">
+        <div class="empty-icon">🖼</div>
+        <p>No approved photos yet.</p>
+      </div>
+
+      <div id="galleryGrid" class="gallery-grid"></div>
+    </section>
+
+  </main>
+
+  <!-- ============================= PREVIEW MODAL ============================= -->
+  <div id="previewModal" class="modal hidden" role="dialog" aria-modal="true" aria-label="Image preview">
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+    <div class="modal-content">
+      <button type="button" id="modalCloseBtn" class="modal-close" aria-label="Close preview">✕</button>
+      <img id="modalImg" class="modal-img" alt="" />
+      <div class="modal-footer">
+        <div class="modal-info">
+          <span id="modalName" class="modal-name"></span>
+          <span id="modalMeta" class="modal-meta"></span>
+        </div>
+        <a id="modalDownload" class="btn btn-secondary" download target="_blank" rel="noopener">Open / Download</a>
+      </div>
+    </div>
+  </div>
+
+  <div id="toastContainer" class="toast-container" aria-live="polite"></div>
+
+  <script src="nav.js"></script>
+  <script type="module" src="home.js"></script>
+</body>
+</html>

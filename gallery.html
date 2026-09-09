@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Gallery — Photo Manager</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="app-header">
+    <div class="header-inner">
+      <a href="index.html" class="brand">
+        <span class="brand-mark">◆</span>
+        <span class="brand-name">Photo Manager</span>
+      </a>
+      <nav class="main-nav" id="mainNav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="gallery.html" class="nav-link active">Gallery</a>
+        <a href="admin.html" class="nav-link">Admin</a>
+      </nav>
+      <button type="button" class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false">☰</button>
+    </div>
+  </header>
+
+  <main class="app-main">
+
+    <section class="panel gallery-panel" aria-label="Photo gallery">
+      <div class="gallery-header">
+        <h2 class="panel-title">Gallery</h2>
+        <div class="search-wrap">
+          <span class="search-icon">⌕</span>
+          <input type="text" id="searchInput" placeholder="Search photos by name…" autocomplete="off" />
+          <button type="button" id="clearSearchBtn" class="clear-search hidden" aria-label="Clear search">✕</button>
+        </div>
+      </div>
+
+      <div class="gallery-meta">
+        <span id="resultCount">0 results</span>
+      </div>
+
+      <div id="galleryLoading" class="gallery-loading">
+        <div class="spinner spinner-lg"></div>
+        <p>Loading photos…</p>
+      </div>
+
+      <div id="galleryEmpty" class="gallery-empty hidden">
+        <div class="empty-icon">🖼</div>
+        <p>No approved photos yet.</p>
+      </div>
+
+      <div id="galleryNoResults" class="gallery-empty hidden">
+        <div class="empty-icon">⌕</div>
+        <p>No results found for your search.</p>
+      </div>
+
+      <div id="galleryGrid" class="gallery-grid"></div>
+    </section>
+
+  </main>
+
+  <div id="previewModal" class="modal hidden" role="dialog" aria-modal="true" aria-label="Image preview">
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+    <div class="modal-content">
+      <button type="button" id="modalCloseBtn" class="modal-close" aria-label="Close preview">✕</button>
+      <img id="modalImg" class="modal-img" alt="" />
+      <div class="modal-footer">
+        <div class="modal-info">
+          <span id="modalName" class="modal-name"></span>
+          <span id="modalMeta" class="modal-meta"></span>
+        </div>
+        <a id="modalDownload" class="btn btn-secondary" download target="_blank" rel="noopener">Open / Download</a>
+      </div>
+    </div>
+  </div>
+
+  <div id="toastContainer" class="toast-container" aria-live="polite"></div>
+
+  <script src="nav.js"></script>
+  <script type="module" src="gallery.js"></script>
+</body>
+</html>

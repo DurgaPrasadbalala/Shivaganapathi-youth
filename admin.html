@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Admin — Photo Manager</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="app-header">
+    <div class="header-inner">
+      <a href="index.html" class="brand">
+        <span class="brand-mark">◆</span>
+        <span class="brand-name">Photo Manager</span>
+      </a>
+      <nav class="main-nav" id="mainNav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="gallery.html" class="nav-link">Gallery</a>
+        <a href="admin.html" class="nav-link active">Admin</a>
+      </nav>
+      <button type="button" class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false">☰</button>
+    </div>
+  </header>
+
+  <main class="app-main">
+
+    <!-- ========================= LOGIN VIEW ========================= -->
+    <section id="loginView" class="panel login-panel" aria-label="Admin login">
+      <h2 class="panel-title">Admin login</h2>
+      <p class="panel-subtitle">Sign in with your admin email and password to manage photos.</p>
+
+      <div class="field">
+        <label for="loginEmail">Email</label>
+        <input type="email" id="loginEmail" placeholder="admin@example.com" autocomplete="username" />
+      </div>
+      <div class="field">
+        <label for="loginPassword">Password</label>
+        <input type="password" id="loginPassword" placeholder="••••••••" autocomplete="current-password" />
+      </div>
+
+      <div id="loginStatusMsg" class="status-msg hidden" role="status"></div>
+
+      <div class="upload-actions">
+        <button type="button" id="loginBtn" class="btn btn-primary" style="flex:1;">
+          <span id="loginBtnText">Sign in</span>
+          <span id="loginSpinner" class="spinner hidden"></span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ========================= DASHBOARD VIEW ========================= -->
+    <section id="dashboardView" class="panel gallery-panel hidden" aria-label="Admin dashboard">
+      <div class="gallery-header">
+        <h2 class="panel-title">All photos</h2>
+        <div class="admin-header-actions">
+          <span id="adminEmail" class="admin-email"></span>
+          <button type="button" id="logoutBtn" class="btn btn-ghost btn-small">Log out</button>
+        </div>
+      </div>
+
+      <div class="tabs" id="statusTabs">
+        <button type="button" class="tab active" data-filter="all">All</button>
+        <button type="button" class="tab" data-filter="pending">Pending</button>
+        <button type="button" class="tab" data-filter="approved">Approved</button>
+      </div>
+
+      <div class="search-wrap admin-search">
+        <span class="search-icon">⌕</span>
+        <input type="text" id="searchInput" placeholder="Search photos by name…" autocomplete="off" />
+        <button type="button" id="clearSearchBtn" class="clear-search hidden" aria-label="Clear search">✕</button>
+      </div>
+
+      <div class="gallery-meta">
+        <span id="resultCount">0 photos</span>
+      </div>
+
+      <div id="galleryLoading" class="gallery-loading">
+        <div class="spinner spinner-lg"></div>
+        <p>Loading photos…</p>
+      </div>
+
+      <div id="galleryEmpty" class="gallery-empty hidden">
+        <div class="empty-icon">🖼</div>
+        <p>No photos match this filter.</p>
+      </div>
+
+      <div id="galleryGrid" class="gallery-grid"></div>
+    </section>
+
+  </main>
+
+  <!-- ============================= PREVIEW MODAL ============================= -->
+  <div id="previewModal" class="modal hidden" role="dialog" aria-modal="true" aria-label="Image preview">
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+    <div class="modal-content">
+      <button type="button" id="modalCloseBtn" class="modal-close" aria-label="Close preview">✕</button>
+      <img id="modalImg" class="modal-img" alt="" />
+      <div class="modal-footer">
+        <div class="modal-info">
+          <span id="modalName" class="modal-name"></span>
+          <span id="modalMeta" class="modal-meta"></span>
+        </div>
+        <a id="modalDownload" class="btn btn-secondary" download target="_blank" rel="noopener">Open / Download</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================= DELETE CONFIRM MODAL ============================= -->
+  <div id="deleteModal" class="modal hidden" role="dialog" aria-modal="true" aria-label="Confirm delete">
+    <div class="modal-backdrop" id="deleteBackdrop"></div>
+    <div class="modal-content modal-content-sm">
+      <h3 class="panel-title">Delete photo?</h3>
+      <p class="delete-warning">This will remove <strong id="deleteTargetName"></strong> from the gallery and database. This action cannot be undone.</p>
+      <div id="deleteStatusMsg" class="status-msg hidden"></div>
+      <div class="upload-actions">
+        <button type="button" id="deleteCancelBtn" class="btn btn-ghost">Cancel</button>
+        <button type="button" id="deleteConfirmBtn" class="btn btn-danger">
+          <span id="deleteConfirmText">Delete</span>
+          <span id="deleteSpinner" class="spinner hidden"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toastContainer" class="toast-container" aria-live="polite"></div>
+
+  <script src="nav.js"></script>
+  <script type="module" src="admin.js"></script>
+</body>
+</html>
