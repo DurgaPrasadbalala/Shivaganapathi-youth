@@ -18,6 +18,6 @@
 // ---------------------------------------------------------------------------
 
 export const CLOUDINARY_CONFIG = {
-  cloudName: "yguobvaw",
-  uploadPreset: "Preset 1",
+  cloudName: "nnnwcbl6",
+  uploadPreset: "Temp01",
 };
